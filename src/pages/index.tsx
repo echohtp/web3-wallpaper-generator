@@ -52,34 +52,77 @@ const Home: React.FC = () => {
 
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Phone Wallpaper Generator</h1>
-      <PhoneModelDropdown onChange={setPhoneModel} />
-      <NFTCollectionDropdown collections={nftCollections} onChange={setNftCollection} />
-      {nftCollection && (
-        <input
-          type="number"
-          placeholder="Enter NFT ID"
-          min="0" // Only allow numbers greater than 0
-          className="block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 mt-4"
-          onChange={(e) => setNftId(e.target.value)}
-          value={nftId}
-        />
-      )}
-          <div className="mt-4">
-        {isLoading ? (
-          <Spinner /> // Your spinner component
-        ) : (
-          nftImageUrl && <img src={nftImageUrl} alt={`NFT ${nftId}`} className="max-w-xs mx-auto" />
-        )}
+    <div className="min-h-screen bg-gray-100 py-10">
+      <div className="container mx-auto px-4">
+        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+          <div className="px-4 py-5 sm:px-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Phone Wallpaper Generator
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Personalize your phone with a unique wallpaper from your favorite NFT collection.
+            </p>
+          </div>
+          <div className="border-t border-gray-200">
+            <dl>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Select your phone model
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <PhoneModelDropdown onChange={setPhoneModel} />
+                </dd>
+              </div>
+              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Choose NFT collection
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <NFTCollectionDropdown collections={nftCollections} onChange={setNftCollection} />
+                </dd>
+              </div>
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  Enter NFT ID
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  <input
+                    type="number"
+                    value={nftId}
+                    onChange={(e) => setNftId(e.target.value)}
+                    className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    placeholder="1234"
+                  />
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div className="mt-8">
+          <button
+            type="button"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            onClick={downloadWallpaper}
+          >
+            Generate Wallpaper
+          </button>
+        </div>
+
+        {/* <div className="mt-8">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            wallpaperUrl && (
+              <img
+                src={wallpaperUrl}
+                alt="Generated Wallpaper"
+                className="mx-auto"
+              />
+            )
+          )}
+        </div> */}
       </div>
-      <button
-        onClick={downloadWallpaper}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
-        disabled={!phoneModel || !nftCollection || !nftId}
-      >
-        Generate Wallpaper
-      </button>
     </div>
   );
 };
