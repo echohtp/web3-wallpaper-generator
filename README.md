@@ -1,38 +1,97 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wallpaper Generator Web App
+
+This repository contains the source code for a wallpaper generator web application. The app allows users to select a phone model, choose an NFT collection, enter an NFT ID, and generate a phone wallpaper with the NFT image centered on a background color sampled from the image itself.
+
+## Features
+
+- Selection of popular phone models including the Solana Saga.
+- Dropdown to choose from a list of NFT collections.
+- Input for specifying the NFT ID to fetch the corresponding image.
+- Generation of a wallpaper with the NFT image centered on a dynamically created background.
+- Responsive design using Tailwind CSS for a seamless experience on various devices.
+
+## Tech Stack
+
+- **Next.js**: A React framework for building server-side rendering and static web applications.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
+- **Sharp**: A high-performance Node.js module to convert large images in common formats to smaller, web-friendly JPEG, PNG, WebP, GIF, and AVIF images of varying dimensions.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/echohtp/wallpaper-generator.git
+cd wallpaper-generator
+```
+
+2. Install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. Select your phone model from the dropdown list.
+2. Choose an NFT collection from the next dropdown.
+3. Enter the NFT ID for the NFT you wish to use as a wallpaper.
+4. Click the "Generate Wallpaper" button.
+5. The generated wallpaper will be displayed on the screen.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## API Reference
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Generate Wallpaper
 
-## Learn More
+`GET /api/wallpaper?model={phoneModel}&collection={nftCollection}&id={nftId}`
 
-To learn more about Next.js, take a look at the following resources:
+Generates a wallpaper based on the provided phone model, NFT collection, and NFT ID.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contributions are welcome! If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
-## Deploy on Vercel
+Don't forget to give the project a star! Thanks again!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+Distributed under the MIT License
+
+## Contact
+
+Your Name - [@0xbanana](https://twitter.com/0xbanana)
+
+Project Link: [https://github.com/echohtp/wallpaper-generator](https://github.com/echohtp/wallpaper-generator)
+
+## Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Sharp Documentation](https://sharp.pixelplumbing.com/)
+- [Choose an Open Source License](https://choosealicense.com)

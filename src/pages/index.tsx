@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PhoneModelDropdown from '../components/PhoneModelDropdown';
 import NFTCollectionDropdown from '../components/NFTCollectionDropdown';
-import Spinner from '../components/Spinner'; // Make sure to create this component
+import Spinner from '../components/Spinner';
 
 
 const Home: React.FC = () => {
