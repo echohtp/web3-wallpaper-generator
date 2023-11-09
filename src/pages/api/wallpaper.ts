@@ -112,8 +112,8 @@ async function createWallpaper(imageBuffer: Buffer, dimensions:any, backgroundIm
    const logoPath = collectionLogos[collectionName];
    if (logoPath) {
     // Determine the size of the logo, e.g., 10% of the wallpaper width
-    const logoWidth = dimensions.width * 0.25;
-    const logoHeight = dimensions.height * 0.25; // or maintain aspect ratio
+    const logoWidth = Math.round(dimensions.width * 0.25);
+    const logoHeight = Math.round(dimensions.height * 0.25); // or maintain aspect ratio
 
     // Load and resize the logo
     const logoBuffer = await sharp(logoPath)
@@ -134,8 +134,8 @@ async function createWallpaper(imageBuffer: Buffer, dimensions:any, backgroundIm
     finalImageBuffer = await sharp(finalImageBuffer)
       .composite([{
         input: logoBuffer,
-        left: (dimensions.width - logoWidth) / 2,
-        top: dimensions.height * 0.3 - logoMetadata.height! / 2,
+        left: Math.round((dimensions.width - logoWidth) / 2),
+        top: Math.round(dimensions.height * 0.3 - logoMetadata.height! / 2),
         // gravity: 'southeast' // This positions the logo at the bottom-right
       }])
       .toBuffer();
