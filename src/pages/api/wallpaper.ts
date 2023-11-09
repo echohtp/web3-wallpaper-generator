@@ -52,7 +52,7 @@ async function applyGradientOverlay(imageBuffer: Buffer, dimensions: any): Promi
 
 
 async function fetchNFTImage(collection: string, id: string): Promise<Buffer> {
-  const nftResponse = await fetch(`http://localhost:3000/api/nft?collection=${collection}&id=${id}`);
+  const nftResponse = await fetch(`${process.env.HOST}/api/nft?collection=${collection}&id=${id}`);
   if (!nftResponse.ok) {
     throw new Error(`NFT API responded with status: ${nftResponse.status}`);
   }
