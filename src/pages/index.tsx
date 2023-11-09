@@ -89,7 +89,14 @@ const Home: React.FC = () => {
                   <input
                     type="number"
                     value={nftId}
-                    onChange={(e) => setNftId(e.target.value)}
+                    onChange={(e) => {
+                      let value = e.target.value;
+                      // If the value starts with '0' and is more than one character, remove the '0'
+                      if (value.startsWith('0') && value.length > 1) {
+                        value = value.substring(1);
+                      }
+                      setNftId(value);
+                    }}
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     placeholder="1234"
                   />

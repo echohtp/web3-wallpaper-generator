@@ -14,9 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     imageUrl = `https://madlads.s3.us-west-2.amazonaws.com/images/${id}.png`
   }
 
+
   // Here you would implement the logic to fetch the NFT image URL
   // based on the collection and ID. This is just a placeholder.
   // You would replace this with actual logic to get the NFT data.
-
+  // console.log(`${imageUrl}`)
   res.status(200).json({ imageUrl });
 }
