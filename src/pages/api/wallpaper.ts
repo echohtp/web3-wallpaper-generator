@@ -56,6 +56,7 @@ async function fetchNFTImage(collection: string, id: string): Promise<Buffer> {
   if (!nftResponse.ok) {
     throw new Error(`NFT API responded with status: ${nftResponse.status}`);
   }
+  //@ts-ignore
   const { imageUrl } = await nftResponse.json();
   const imageResponse = await fetch(imageUrl);
   if (!imageResponse.ok) {
@@ -68,12 +69,13 @@ async function getTileImage(id: string): Promise<Buffer> {
   const jsonUrl = `https://madlads.s3.us-west-2.amazonaws.com/json/${id}.json`;
   const response = await fetch(jsonUrl);
   const json = await response.json();
+  //@ts-ignore
   const backgroundAttribute = json.attributes.find(attr => attr.trait_type === "Background");
   return sharp(`src/bg/${backgroundAttribute.value}-bkg.png`).toBuffer();
 }
 
 
-async function createWallpaper(imageBuffer: Buffer, dimensions, backgroundImageBuffer: Buffer, collectionName: string): Promise<Buffer> {
+async function createWallpaper(imageBuffer: Buffer, dimensions:any, backgroundImageBuffer: Buffer, collectionName: string): Promise<Buffer> {
   // Resize the background image to cover the dimensions of the wallpaper
   const resizedBackground = await sharp(backgroundImageBuffer)
     .resize(dimensions.width, dimensions.height, {
@@ -84,7 +86,7 @@ async function createWallpaper(imageBuffer: Buffer, dimensions, backgroundImageB
   // Resize the NFT image if it's larger than the background
   const originalImageMetadata = await sharp(imageBuffer).metadata();
   let resizedNftImageBuffer = imageBuffer;
-  if (originalImageMetadata.width > dimensions.width || originalImageMetadata.height > dimensions.height) {
+  if (originalImageMetadata.width! > dimensions.width || originalImageMetadata.height! > dimensions.height) {
     resizedNftImageBuffer = await sharp(imageBuffer)
       .resize({
         width: dimensions.width,
@@ -97,12 +99,12 @@ async function createWallpaper(imageBuffer: Buffer, dimensions, backgroundImageB
 
   // Calculate position to center the resized NFT image on the background
   const resizedImageMetadata = await sharp(resizedNftImageBuffer).metadata();
-  const left = (dimensions.width - resizedImageMetadata.width) / 2;
-  const top = (dimensions.height - resizedImageMetadata.height) / 2;
+  const left = (dimensions.width - resizedImageMetadata.width!) / 2;
+  const top = (dimensions.height - resizedImageMetadata.height!) / 2;
 
   // Composite the resized NFT image over the resized background
   let finalImageBuffer = await sharp(resizedBackground)
-    .composite([{ input: resizedNftImageBuffer, left: Math.round(left), top: Math.round(dimensions.height - resizedImageMetadata.height) }])
+    .composite([{ input: resizedNftImageBuffer, left: Math.round(left), top: Math.round(dimensions.height - resizedImageMetadata.height!) }])
     .toBuffer();
 
 
@@ -133,7 +135,7 @@ async function createWallpaper(imageBuffer: Buffer, dimensions, backgroundImageB
       .composite([{
         input: logoBuffer,
         left: (dimensions.width - logoWidth) / 2,
-        top: dimensions.height * 0.3 - logoMetadata.height / 2,
+        top: dimensions.height * 0.3 - logoMetadata.height! / 2,
         // gravity: 'southeast' // This positions the logo at the bottom-right
       }])
       .toBuffer();
@@ -164,7 +166,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // imageBuffer = await applyGradientOverlay(imageBuffer, {width: originalImageMetadata.width, height: originalImageMetadata.height * 0.1});
     }
 
-    const finalImage = await createWallpaper(imageBuffer, dimensions, tileImageBuffer, collection);
+    const finalImage = await createWallpaper(imageBuffer, dimensions, tileImageBuffer!, collection);
     res.setHeader('Content-Type', 'image/png');
     res.send(finalImage);
   } catch (error) {
